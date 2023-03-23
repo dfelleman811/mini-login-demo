@@ -1,0 +1,27 @@
+.button {
+    background: lightseagreen;
+    border: 1px solid teal;
+    border-radius: 2px;
+    padding: 0.75rem 3.5rem;
+    cursor: pointer;
+}
+
+.button:hover,
+.button:active {
+    background: lightblue;
+    border: darkblue;
+}
+
+.button:focus {
+    outline: none;
+}
+
+button:disabled,
+button:focus:disabled,
+button:hover:disabled,
+button:active:disabled {
+    background: gainsboro;
+    border-color:aliceblue;
+    color: #666;
+    cursor: not-allowed;
+}
