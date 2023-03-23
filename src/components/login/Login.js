@@ -16,7 +16,7 @@ const Login = (props) => {
     setEnteredEmail(event.target.value);
 
     setFormIsValid(
-      event.target.value.includes("@") && enteredPassword.trim().length > 8
+      event.target.value.includes("@") && enteredPassword.trim().length > 7
     );
   };
 
@@ -28,12 +28,12 @@ const Login = (props) => {
     setEnteredPassword(event.target.value);
 
     setFormIsValid(
-      event.target.value.trim().length > 8 && enteredEmail.includes("@")
+      event.target.value.trim().length > 7 && enteredEmail.includes("@")
     );
   };
 
   const validatePasswordHandler = () => {
-    setPasswordIsValid(enteredPassword.trim().length > 8);
+    setPasswordIsValid(enteredPassword.trim().length > 7);
   };
 
   const submitHandler = (event) => {

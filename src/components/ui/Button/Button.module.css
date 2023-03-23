@@ -1,7 +1,7 @@
 .button {
     background: lightseagreen;
     border: 1px solid teal;
-    border-radius: 2px;
+    border-radius: 10px;
     padding: 0.75rem 3.5rem;
     cursor: pointer;
 }
