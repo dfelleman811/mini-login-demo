@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Button from "../ui/Button/Button";
 import Card from "../ui/Card/Card";
@@ -12,12 +12,17 @@ const Login = (props) => {
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
+  // by passing dependencies to use effect, we ensure it's only run when one of those dependencies changes (React guarantees that any setXXX function from useState will never change)
+  // checking the validity of user input after a change can be considered a sideEffect - a side effect of the user entering data
+  // whenever you have an action that should be executed in response to another action - that IS a side effect - and where useEffect comes in
+  useEffect(() => {
+    setFormIsValid(
+      enteredEmail.includes("@") && enteredPassword.trim().length > 7
+    )
+  }, [enteredEmail, enteredPassword]) // n.b. make sure to just point to the function, not invoke it
+
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
-
-    setFormIsValid(
-      event.target.value.includes("@") && enteredPassword.trim().length > 7
-    );
   };
 
   const validateEmailHandler = () => {
@@ -26,10 +31,6 @@ const Login = (props) => {
 
   const passwordChangeHandler = (event) => {
     setEnteredPassword(event.target.value);
-
-    setFormIsValid(
-      event.target.value.trim().length > 7 && enteredEmail.includes("@")
-    );
   };
 
   const validatePasswordHandler = () => {
