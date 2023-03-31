@@ -16,10 +16,20 @@ const Login = (props) => {
   // checking the validity of user input after a change can be considered a sideEffect - a side effect of the user entering data
   // whenever you have an action that should be executed in response to another action - that IS a side effect - and where useEffect comes in
   useEffect(() => {
-    setFormIsValid(
-      enteredEmail.includes("@") && enteredPassword.trim().length > 7
-    )
-  }, [enteredEmail, enteredPassword]) // n.b. make sure to just point to the function, not invoke it
+    const checkValidityTimer = setTimeout(()=>{
+      console.log('Checking validity.');
+      setFormIsValid(
+        enteredEmail.includes("@") && enteredPassword.trim().length > 7
+      );
+    }, 500)
+    
+    // useEffect can return -> this is called a cleanup function - will run as a cleanup process before useEffect runs again. (It will only not run the very first time the compenent is rendered).
+    return () => {
+      console.log("CLEANUP");
+      clearTimeout(checkValidityTimer); // as long as the user keeps typing, the timer will clear and restart (unless user pauses in typing for more than 1 second)
+    };
+
+  }, [enteredEmail, enteredPassword])
 
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
